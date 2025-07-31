@@ -1,8 +1,10 @@
-import NotionApp from "./components/NotionApp"
+import NotionPage from "./components/NotionPage"
 
 const App = () => {
   return (
-    <NotionApp/>
+    <div className="flex justify-center items-center bg-gray-200 w-full h-screen">
+        <NotionPage/>
+    </div>
   )
 }
 
