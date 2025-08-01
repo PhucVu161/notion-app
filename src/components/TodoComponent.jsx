@@ -1,4 +1,3 @@
-import React from "react";
 import PriorityComponent from "./PriorityComponent";
 
 const styleByCompleted = (completed) => {

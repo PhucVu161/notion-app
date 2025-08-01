@@ -12,6 +12,7 @@ export default function AddTodo({ setTodoList }) {
     [setPriorityState]
   );
   const addTodo = useCallback(() => {
+    if(nameTodo==="") return;
     setNameTodo("");
     setPriorityState("Medium");
     setTodoList((pre) => [
@@ -28,8 +29,9 @@ export default function AddTodo({ setTodoList }) {
   return (
     <div className="flex gap-2">
       <input
-        className="flex-auto border-2 border-gray-300"
+        className="flex-auto border-2 border-gray-300 px-2"
         type="text"
+        placeholder="Nhập việc cần thêm"
         value={nameTodo}
         onChange={(e) => setNameTodo(e.target.value)}
       />

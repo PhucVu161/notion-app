@@ -1,7 +1,7 @@
-import FilterTodoList from "./FilterTodoList"
-import TodoList from "./TodoList"
-import AddTodo from "./AddTodo"
-import { useState } from "react"
+import FilterTodoList from "./FilterTodoList";
+import TodoList from "./TodoList";
+import AddTodo from "./AddTodo";
+import { useState } from "react";
 const initTodoList = [
   {
     id: 1,
@@ -21,16 +21,18 @@ const initTodoList = [
     priority: "Medium",
     completed: false,
   },
-]
+];
 
 export default function NotionPage() {
+  const [textSearch, setTextSearch] = useState("");
+  const [statusSelected, setStatusSelected] = useState("All");
   const [todoList, setTodoList] = useState(initTodoList);
 
   return (
-    <div className="flex flex-col justify-between w-[500px] h-[650px] rounded-xl bg-white p-4 shadow-[0px_0px_10px_0px_gray]">
-      <FilterTodoList/>
-      <TodoList todoList={todoList} setTodoList={setTodoList}/>
-      <AddTodo setTodoList={setTodoList}/>      
+    <div className="flex flex-col justify-between gap-16 w-[500px] h-[650px] rounded-xl bg-white p-4 shadow-[0px_0px_10px_0px_gray]">
+      <FilterTodoList textSearch={textSearch} setTextSearch={setTextSearch} statusSelected={statusSelected} setStatusSelected={setStatusSelected}/>
+      <TodoList todoList={todoList} setTodoList={setTodoList} textSearch={textSearch} statusSelected={statusSelected}/>
+      <AddTodo setTodoList={setTodoList} />
     </div>
-  )
+  );
 }
