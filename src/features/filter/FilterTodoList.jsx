@@ -6,11 +6,12 @@ const STATUS = ["All", "Completed", "Todo"];
 const PRIORITIES = ["High", "Medium", "Low"];
 
 export default function FilterTodoList() {
-  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const textSearch = useSelector(selectTextSearch);
   const statusSelected = useSelector(selectStatusSelected);
   const prioritiesSelected = useSelector(selectPrioritiesSelected);
+
+  const [isOpen, setIsOpen] = useState(false);
   const selectorStyle = isOpen ? "" : "hidden";
 
   return (
@@ -20,10 +21,10 @@ export default function FilterTodoList() {
         <label className="font-medium" htmlFor="searchText">
           Search
         </label>
-        <div class="flex items-center border border-gray-300 px-2 py-1">
+        <div className="flex items-center border border-gray-300 px-2 py-1">
           <input
             type="text"
-            class="flex-1 outline-none"
+            className="flex-1 outline-none"
             id="searchText"
             placeholder="Nhập việc cần tìm"
             value={textSearch}
@@ -31,14 +32,14 @@ export default function FilterTodoList() {
               dispatch(setText(e.target.value));
             }}
           />
-          <span class="ml-2 text-gray-500">🔍</span>
+          <span className="ml-2 text-gray-500">🔍</span>
         </div>
       </div>
       <div>
         <div className="font-medium">Filter by status</div>
         <div className="flex gap-4">
           {STATUS.map((item) => (
-            <label>
+            <label key={item}>
               <input
                 className="mr-1"
                 type="radio"
@@ -68,6 +69,7 @@ export default function FilterTodoList() {
           >
             {PRIORITIES.map((item) => (
               <div
+                key={item}
                 className="p-2 bg-white hover:bg-gray-200 text-start"
                 onClick={() => {
                   dispatch(addPriority(item));

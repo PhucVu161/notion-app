@@ -1,15 +1,14 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { selectPrioritiesSelected, selectStatusSelected, selectTextSearch } from "../../filter";
+import { selectTodoList } from "../../todo-list";
 import Todo from "./Todo";
 
-export default function TodoList({
-  todoList,
-  setTodoList,
-}) {
+export default function TodoList() {
   const textSearch = useSelector(selectTextSearch)
   const statusSelected = useSelector(selectStatusSelected)
   const prioritiesSelected = useSelector(selectPrioritiesSelected)
+  const todoList = useSelector(selectTodoList)
   const filterTodoList = useMemo(() => {
     return todoList
       .filter((todo) => todo.name.includes(textSearch))
@@ -24,7 +23,7 @@ export default function TodoList({
         }
       })
       .filter((todo) =>
-        prioritiesSelected < 1
+        prioritiesSelected.length < 1
           ? true
           : prioritiesSelected.includes(todo.priority)
       );
@@ -37,7 +36,7 @@ export default function TodoList({
       {filterTodoList.length < 1
         ? "Không có việc cần làm!"
         : filterTodoList.map((todo) => (
-            <Todo key={todo.id} todo={todo} setTodoList={setTodoList} />
+            <Todo key={todo.id} todo={todo} />
           ))}
     </div>
   );
