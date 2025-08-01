@@ -1,13 +1,15 @@
 import { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { selectPrioritiesSelected, selectStatusSelected, selectTextSearch } from "../../filter";
 import Todo from "./Todo";
 
 export default function TodoList({
   todoList,
   setTodoList,
-  textSearch,
-  statusSelected,
-  prioritiesSelected,
 }) {
+  const textSearch = useSelector(selectTextSearch)
+  const statusSelected = useSelector(selectStatusSelected)
+  const prioritiesSelected = useSelector(selectPrioritiesSelected)
   const filterTodoList = useMemo(() => {
     return todoList
       .filter((todo) => todo.name.includes(textSearch))

@@ -1,24 +1,17 @@
 import Priority from "../../components/PriorityComponent";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux"
+import { selectTextSearch, selectStatusSelected, selectPrioritiesSelected, setText, setStatus, addPriority, deletePriority } from "./";
 const STATUS = ["All", "Completed", "Todo"];
 const PRIORITIES = ["High", "Medium", "Low"];
 
-export default function FilterTodoList({
-  textSearch,
-  setTextSearch,
-  statusSelected,
-  setStatusSelected,
-  prioritiesSelected,
-  setPrioritiesSelected,
-}) {
+export default function FilterTodoList() {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+  const textSearch = useSelector(selectTextSearch);
+  const statusSelected = useSelector(selectStatusSelected);
+  const prioritiesSelected = useSelector(selectPrioritiesSelected);
   const selectorStyle = isOpen ? "" : "hidden";
-  const handleSelectPriority = (item) => {
-    setPrioritiesSelected((pre) => (pre.includes(item) ? pre : [...pre, item]));
-  };
-  const handleDeletePriority = (item) => {
-    setPrioritiesSelected((pre) => (pre.filter(preItem => preItem !== item)));
-  };
 
   return (
     <div className="space-y-2">
@@ -35,7 +28,7 @@ export default function FilterTodoList({
             placeholder="Nhập việc cần tìm"
             value={textSearch}
             onChange={(e) => {
-              setTextSearch(e.target.value);
+              dispatch(setText(e.target.value));
             }}
           />
           <span class="ml-2 text-gray-500">🔍</span>
@@ -52,7 +45,7 @@ export default function FilterTodoList({
                 value={item}
                 checked={item === statusSelected}
                 onChange={(e) => {
-                  setStatusSelected(e.target.value);
+                  dispatch(setStatus(e.target.value));
                 }}
               />
               {item}
@@ -77,7 +70,7 @@ export default function FilterTodoList({
               <div
                 className="p-2 bg-white hover:bg-gray-200 text-start"
                 onClick={() => {
-                  handleSelectPriority(item);
+                  dispatch(addPriority(item));
                 }}
               >
                 <Priority priority={item} />
@@ -96,7 +89,7 @@ export default function FilterTodoList({
                     <span
                       onClick={(e) => {
                         e.stopPropagation(); //ngăn sự kiện nổi lên, giúp chặn sự kiện hiện selector trong thẻ cha
-                        handleDeletePriority(item);
+                        dispatch(deletePriority(item));
                       }}
                     >
                       X
