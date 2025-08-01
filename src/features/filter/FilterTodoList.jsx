@@ -1,4 +1,4 @@
-import Priority from "./PriorityComponent";
+import Priority from "../../components/PriorityComponent";
 import { useState } from "react";
 const STATUS = ["All", "Completed", "Todo"];
 const PRIORITIES = ["High", "Medium", "Low"];

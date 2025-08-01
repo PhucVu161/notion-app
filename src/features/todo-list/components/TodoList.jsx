@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import Todo from "./TodoComponent";
+import Todo from "./Todo";
 
 export default function TodoList({
   todoList,

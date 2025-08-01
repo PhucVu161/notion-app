@@ -1,4 +1,4 @@
-import NotionPage from "./components/NotionPage"
+import NotionPage from "./pages/NotionPage"
 
 const App = () => {
   return (

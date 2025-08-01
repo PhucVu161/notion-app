@@ -1,4 +1,4 @@
-import PriorityComponent from "./PriorityComponent";
+import PriorityComponent from "../../../components/PriorityComponent";
 
 const styleByCompleted = (completed) => {
   return completed ? "line-through opacity-50" : "";

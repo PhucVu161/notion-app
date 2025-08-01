@@ -1,6 +1,6 @@
-import FilterTodoList from "./FilterTodoList";
-import TodoList from "./TodoList";
-import AddTodo from "./AddTodo";
+import FilterTodoList from "../features/filter/FilterTodoList";
+import TodoList from "../features/todo-list/components/TodoList";
+import AddTodo from "../features/todo-list/components/AddTodo";
 import { useState } from "react";
 const initTodoList = [
   {
