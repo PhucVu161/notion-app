@@ -6,6 +6,7 @@ export default function TodoList({
   setTodoList,
   textSearch,
   statusSelected,
+  prioritiesSelected,
 }) {
   const filterTodoList = useMemo(() => {
     return todoList
@@ -19,16 +20,23 @@ export default function TodoList({
           case "Todo":
             return !todo.completed;
         }
-      });
-  }, [todoList, textSearch, statusSelected]);
+      })
+      .filter((todo) =>
+        prioritiesSelected < 1
+          ? true
+          : prioritiesSelected.includes(todo.priority)
+      );
+  }, [todoList, textSearch, statusSelected, prioritiesSelected]);
   return (
     <div className="grow-1">
       <div className="flex justify-center font-bold mb-2">
         Danh sách việc cần làm
       </div>
-      {filterTodoList.map((todo) => (
-        <Todo key={todo.id} todo={todo} setTodoList={setTodoList} />
-      ))}
+      {filterTodoList.length < 1
+        ? "Không có việc cần làm!"
+        : filterTodoList.map((todo) => (
+            <Todo key={todo.id} todo={todo} setTodoList={setTodoList} />
+          ))}
     </div>
   );
 }
