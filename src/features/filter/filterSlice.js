@@ -15,16 +15,18 @@ const filterSlice = createSlice({
       state.statusSelected = action.payload;
     },
     addPriority: (state, action) => {
-      state.prioritiesSelected = state.prioritiesSelected.includes(
-        action.payload
-      )
-        ? state.prioritiesSelected
-        : [...state.prioritiesSelected, action.payload];
+      if (!state.prioritiesSelected.includes(action.payload)) {
+        state.prioritiesSelected.push(action.payload);
+      }
     },
     deletePriority: (state, action) => {
-        state.prioritiesSelected = state.prioritiesSelected.filter(priority => priority !== action.payload)
-    }
+      state.prioritiesSelected = state.prioritiesSelected.filter(
+        (priority) => priority !== action.payload
+      );
+    },
   },
+  devTools: true,
 });
-export const { setText, setStatus, addPriority, deletePriority } = filterSlice.actions;
+export const { setText, setStatus, addPriority, deletePriority } =
+  filterSlice.actions;
 export default filterSlice.reducer;

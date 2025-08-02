@@ -55,7 +55,7 @@ export default function FilterTodoList() {
         </div>
       </div>
       <div>
-        <label className="font-medium" htmlFor="priorityText">
+        <label className="font-medium">
           Filter by priority
         </label>
         <button
